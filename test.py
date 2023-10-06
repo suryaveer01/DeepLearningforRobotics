@@ -10,8 +10,17 @@ from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 
 import torchsummary
 from torch.utils.tensorboard import SummaryWriter
+import torch.profiler
+
 
 writer = SummaryWriter()
+
+# prof = torch.profiler.profile(
+#         schedule=torch.profiler.schedule(wait=1, warmup=1, active=3, repeat=2),
+#         on_trace_ready=torch.profiler.tensorboard_trace_handler('runs/profiler/'),
+#         record_shapes=True,
+#         with_stack=True,
+#         use_cuda=True)
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -30,7 +39,7 @@ class_to_idx = dataset.class_to_idx
 
 conf_matrix_labels = class_to_idx.keys()
 
-batch_size = 32
+batch_size = 64
 # dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
 
@@ -99,7 +108,7 @@ print(device)
 model.to(device)
 
 torchsummary.summary(model, input_size=(3, 224, 224))
-PATH = 'best_model.pth'
+PATH = '30_best_model.pth'
 
 
 # loss function and optimizer
@@ -113,7 +122,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 print('start training')
 
-# epochs = 20
+# epochs = 30
 # best_val_loss = 10.0
 
 # for epoch in range(epochs):
@@ -173,7 +182,11 @@ print('start training')
 #         best_val_loss = epoch_val_loss
 #         torch.save(model.state_dict(), PATH)
 
+#     # prof.step()
+
 print('Finished Training')
+
+# prof.stop()
 
 
 # loading the model

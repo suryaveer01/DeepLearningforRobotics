@@ -1,9 +1,5 @@
-from ultralytics import YOLO, engine
-from ultralytics.models.yolo.classify import ClassificationPredictor
+from ultralytics import YOLO
 
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
