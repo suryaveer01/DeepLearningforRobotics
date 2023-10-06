@@ -193,8 +193,10 @@ print('Finished Training')
 
 model = CustomCNN()
 model.to(device)
-model.load_state_dict(torch.load(PATH))
-
+if(device == 'cpu'):
+    model.load_state_dict(torch.load(PATH, map_location=torch.device('cpu')))
+else:
+    model.load_state_dict(torch.load(PATH))
 # testing loop
 model.eval()
 correct = 0
