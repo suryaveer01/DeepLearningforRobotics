@@ -29,4 +29,4 @@ python .\train.py
 python .\yoloimageclassification.py
 
 7. Check tensorboard
-tensorboard --logdir=runs
+tensorboard --logdir=runs --port=8008
