@@ -27,3 +27,6 @@ python .\train.py
 
 6. Check performance of YOLOv8 Classifier trained on Imagenet
 python .\yoloimageclassification.py
+
+7. Check tensorboard
+tensorboard --logdir=runs
